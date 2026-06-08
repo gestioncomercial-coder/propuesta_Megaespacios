@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEGAESPACIOS × Propuesta Tecnológica</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D1B3E;
+    --navy2: #1A2F6B;
+    --accent: #2E5CF6;
+    --accent2: #7FA6FF;
+    --white: #FFFFFF;
+    --gray: #8892A4;
+    --light: #F4F6FF;
+    --gold: #F5A623;
+    --green: #00A86B;
+    --green-light: #4DD6A0;
+    --blue2: #1565C0;
+    --blue2-light: #90CAF9;
+    --purple: #7B2FBE;
+    --purple-light: #C084FC;
+    --border: rgba(255,255,255,0.08);
+    --surface: rgba(255,255,255,0.04);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 2.5rem;
+    background: rgba(13,27,62,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .nav-logo-box {
+    background: var(--accent);
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+  .nav-sep { color: var(--border); font-size: 1.2rem; }
+  .nav-sub { font-size: 0.75rem; color: var(--gray); letter-spacing: 0.05em; }
+
+  .nav-tabs {
+    display: flex;
+    gap: 0.25rem;
+  }
+  .nav-tab {
+    padding: 0.4rem 1.1rem;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.45);
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    border-radius: 6px;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .nav-tab:hover { background: rgba(255,255,255,0.07); color: var(--white); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: 5rem 2.5rem 4rem;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(46,92,246,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(46,92,246,0.18);
+    border: 1px solid rgba(46,92,246,0.35);
+    color: var(--accent2);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.35rem 1.1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 1rem;
+  }
+  .hero h1 .accent { color: var(--accent); }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.5);
+    max-width: 560px;
+    margin: 1.2rem auto 3rem;
+    line-height: 1.7;
+  }
+
+  /* disclaimer banner */
+  .disclaimer {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(245,166,35,0.1);
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: 10px;
+    padding: 0.7rem 1.25rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 560px;
+    text-align: left;
+    line-height: 1.5;
+    margin: 0 auto 3rem;
+  }
+  .disclaimer-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .disclaimer strong { color: var(--gold); }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.6rem;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.3rem; }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
+    margin: 0 2.5rem;
+  }
+
+  /* ── PAIN SECTION ── */
+  .block { padding: 3rem 2.5rem; }
+  .block-sm { padding: 2rem 2.5rem; }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+  }
+  .section-h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .section-desc {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.85rem;
+  }
+  .pain-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    transition: border-color 0.2s;
+  }
+  .pain-card:hover { border-color: rgba(255,255,255,0.15); }
+  .pain-icon {
+    width: 36px; height: 36px;
+    background: rgba(229,57,53,0.12);
+    border: 1px solid rgba(229,57,53,0.2);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+  .pain-text strong {
+    display: block;
+    font-size: 0.87rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: white;
+  }
+  .pain-text p { font-size: 0.79rem; color: rgba(255,255,255,0.55); line-height: 1.55; }
+
+  /* ── SOL TABS ── */
+  .sol-toggle {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .sol-btn {
+    flex: 1;
+    min-width: 180px;
+    padding: 0.9rem 1.2rem;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: all 0.25s;
+  }
+  .sol-btn.totvs-fluig {
+    background: rgba(0,168,107,0.07);
+    border-color: rgba(0,168,107,0.2);
+    color: var(--green-light);
+  }
+  .sol-btn.totvs-fluig:hover, .sol-btn.totvs-fluig.active {
+    background: rgba(0,168,107,0.16);
+    border-color: var(--green);
+  }
+  .sol-btn.totvs-erp {
+    background: rgba(245,166,35,0.07);
+    border-color: rgba(245,166,35,0.2);
+    color: var(--gold);
+  }
+  .sol-btn.totvs-erp:hover, .sol-btn.totvs-erp.active {
+    background: rgba(245,166,35,0.16);
+    border-color: var(--gold);
+  }
+  .sol-btn.calipso {
+    background: rgba(21,101,192,0.07);
+    border-color: rgba(21,101,192,0.2);
+    color: var(--blue2-light);
+  }
+  .sol-btn.calipso:hover, .sol-btn.calipso.active {
+    background: rgba(21,101,192,0.16);
+    border-color: var(--blue2);
+  }
+
+  .sol-panel { display: none; }
+  .sol-panel.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .sol-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .badge {
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid;
+  }
+  .badge-green { background: rgba(0,168,107,0.15); color: var(--green-light); border-color: rgba(0,168,107,0.3); }
+  .badge-gold { background: rgba(245,166,35,0.15); color: var(--gold); border-color: rgba(245,166,35,0.3); }
+  .badge-blue { background: rgba(21,101,192,0.15); color: var(--blue2-light); border-color: rgba(21,101,192,0.3); }
+
+  .sol-headline { font-size: 1.5rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.75rem; }
+  .sol-desc { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 1.75rem; }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .products-grid.single { grid-template-columns: 1fr; }
+  @media (max-width: 640px) { .products-grid { grid-template-columns: 1fr; } }
+
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .product-card:hover { border-color: rgba(255,255,255,0.14); }
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .totvs-card::before { background: linear-gradient(90deg, #00A86B, #4DD6A0); }
+  .totvs-erp-card::before { background: linear-gradient(90deg, #F5A623, #FFD580); }
+  .calipso-card::before { background: linear-gradient(90deg, #1565C0, #42A5F5); }
+
+  .product-name { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .product-desc { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.55; margin-bottom: 1.1rem; }
+  .feature-list { list-style: none; }
+  .feature-list li {
+    font-size: 0.79rem;
+    color: rgba(255,255,255,0.65);
+    padding: 0.28rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.4;
+  }
+  .feature-list li::before { content: '✓'; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+  .totvs-card .feature-list li::before { color: var(--green); }
+  .totvs-erp-card .feature-list li::before { color: var(--gold); }
+  .calipso-card .feature-list li::before { color: #42A5F5; }
+
+  .sol-rationale {
+    border-radius: 12px;
+    padding: 1.1rem 1.35rem;
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.65);
+  }
+  .sol-rationale strong { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .rationale-green { background: rgba(0,168,107,0.07); border: 1px solid rgba(0,168,107,0.2); }
+  .rationale-green strong { color: var(--green-light); }
+  .rationale-gold { background: rgba(245,166,35,0.07); border: 1px solid rgba(245,166,35,0.2); }
+  .rationale-gold strong { color: var(--gold); }
+  .rationale-blue { background: rgba(21,101,192,0.09); border: 1px solid rgba(21,101,192,0.25); }
+  .rationale-blue strong { color: var(--blue2-light); }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 0.65rem; }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: border-color 0.2s;
+  }
+  .step:hover { border-color: rgba(255,255,255,0.14); }
+  .step-num {
+    width: 30px; height: 30px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-body h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .step-body p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .step-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.55rem;
+    border-radius: 100px;
+    background: rgba(46,92,246,0.15);
+    color: var(--accent2);
+    border: 1px solid rgba(46,92,246,0.25);
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    margin: 0 2.5rem 2.5rem;
+    background: rgba(46,92,246,0.08);
+    border: 1px solid rgba(46,92,246,0.2);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+  .cta-sub { font-size: 0.9rem; color: rgba(255,255,255,0.5); margin-bottom: 2rem; line-height: 1.6; }
+  .cta-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 0.8rem 2rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: opacity 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost {
+    padding: 0.8rem 2rem;
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    font-size: 0.88rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.07); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 1.5rem 2.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--gray);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 0.75rem 1rem; flex-direction: column; gap: 0.6rem; }
+    .block { padding: 2rem 1.25rem; }
+    .block-sm { padding: 1.5rem 1.25rem; }
+    .hero { padding: 3.5rem 1.25rem 3rem; }
+    .hero-stats { gap: 2rem; }
+    .sol-toggle { flex-direction: column; }
+    .cta-section { margin: 0 1.25rem 2rem; padding: 2rem 1.25rem; }
+    footer { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-box">MEGAESPACIOS</div>
+    <span class="nav-sep">×</span>
+    <span class="nav-sub">Propuesta tecnológica</span>
+  </div>
+  <div class="nav-tabs">
+    <a class="nav-tab" href="#contexto">Contexto</a>
+    <a class="nav-tab" href="#soluciones">Soluciones</a>
+    <a class="nav-tab" href="#pasos">Cómo trabajamos</a>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 1: OVERVIEW / CONTEXTO
+══════════════════════════════════════════ -->
+<div id="contexto">
+
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-eyebrow">Propuesta comercial — Primera reunión</div>
+    <h1>MEGAESPACIOS<br><span class="accent">CRECE CON<br>TECNOLOGÍA</span></h1>
+    <p class="hero-sub">Líderes en real estate industrial en Argentina. En esta primera conversación, queremos entender su operación y compartirles tres caminos tecnológicos con alto impacto en eficiencia y control.</p>
+
+    <div class="disclaimer">
+      <span class="disclaimer-icon">💡</span>
+      <span>Los desafíos que mencionamos a continuación son <strong>hipótesis basadas en lo que vemos en el mercado</strong> para empresas del sector inmobiliario industrial. Uno de los objetivos de esta reunión es validarlos junto a ustedes.</span>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Propuestas tecnológicas</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">+25</span>
+        <span class="stat-label">Años de experiencia</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Soporte local en español</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="block">
+    <div class="section-label">Hipótesis de trabajo — a validar con ustedes</div>
+    <div class="section-h2">Desafíos frecuentes en el sector</div>
+    <p class="section-desc">Basado en nuestra experiencia con empresas del mercado inmobiliario industrial en Argentina, estos son los puntos de fricción más comunes. ¿Cuáles resuenan con la realidad de MEGAESPACIOS?</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">⚠️</div>
+        <div class="pain-text">
+          <strong>Gestión de proveedores dispersa</strong>
+          <p>Comunicación por mail, órdenes de compra sin sistema central, dificultad para rastrear estados de pago y documentación.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📊</div>
+        <div class="pain-text">
+          <strong>Visibilidad limitada en tiempo real</strong>
+          <p>Reportes de ocupación, ingresos y contratos que llegan tarde o requieren consolidación manual de distintas fuentes.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔄</div>
+        <div class="pain-text">
+          <strong>Sistemas que no se integran</strong>
+          <p>Contabilidad, facturación, CRM y gestión de contratos funcionando en silos, generando doble carga de trabajo.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📁</div>
+        <div class="pain-text">
+          <strong>Documentación sin centralizar</strong>
+          <p>Contratos, planos, habilitaciones y acuerdos guardados en carpetas locales, sin versión única y de difícil acceso remoto.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📋</div>
+        <div class="pain-text">
+          <strong>Onboarding manual de inquilinos</strong>
+          <p>Proceso de alta de nuevos clientes que consume tiempo del equipo en tareas repetitivas y de bajo valor estratégico.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📅</div>
+        <div class="pain-text">
+          <strong>Seguimiento de vencimientos</strong>
+          <p>Contratos de alquiler y venta con fechas clave que se gestionan en planillas, sin alertas automáticas ni workflow de renovación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: SOLUCIONES
+══════════════════════════════════════════ -->
+<div id="soluciones">
+
+  <div class="block">
+    <div class="section-label">Dos propuestas — una decisión</div>
+    <div class="section-h2">Tecnología a medida para el sector industrial</div>
+    <p class="section-desc">Les presentamos dos caminos sólidos. Pueden elegir uno según sus prioridades. Ambos cuentan con soporte local y experiencia comprobada en Argentina y Latinoamérica.</p>
+
+    <div class="sol-toggle">
+      <button class="sol-btn totvs-fluig active" onclick="showSol('totvs-fluig', this)">Opción A — Ecosistema TOTVS</button>
+      <button class="sol-btn calipso" onclick="showSol('calipso', this)">Opción B — Calipso ERP + Portal de Proveedores</button>
+    </div>
+
+    <!-- TOTVS ECOSISTEMA PANEL (Opción A: Fluig + BI + ERP) -->
+    <div id="sol-totvs-fluig" class="sol-panel active">
+      <div class="sol-header">
+        <span class="badge badge-green">TOTVS Protheus ERP</span>
+        <span class="badge badge-green">TOTVS Fluig</span>
+        <span class="badge badge-green">TOTVS BI</span>
+        <span class="badge badge-green">Líder en LATAM</span>
+      </div>
+      <div class="sol-headline">El ecosistema TOTVS completo: ERP, gestión documental e inteligencia de negocios en una sola plataforma</div>
+      <p class="sol-desc">Xperts es partner asociado de TOTVS, el proveedor líder de software empresarial en América Latina con presencia en más de 40 países. Les presentamos el ecosistema completo: Protheus ERP como núcleo de gestión, Fluig para digitalizar procesos y documentos, y BI para decisiones en tiempo real.</p>
+
+      <div class="products-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div class="product-card totvs-card">
+          <div class="product-name">TOTVS Protheus ERP</div>
+          <p class="product-desc">Núcleo integrador de todos los procesos empresariales: finanzas, compras, ventas, inventario y contratos en una plataforma unificada.</p>
+          <ul class="feature-list">
+            <li>Gestión contable y financiera (AFIP/ARCA)</li>
+            <li>Cuentas a cobrar y a pagar integradas</li>
+            <li>Administración de contratos de alquiler y venta</li>
+            <li>Control de activos fijos e inmuebles</li>
+            <li>Compras, stock y logística integrados</li>
+            <li>Facturación electrónica nativa</li>
+            <li>Tesorería y proyección de flujo de caja</li>
+          </ul>
+        </div>
+        <div class="product-card totvs-card">
+          <div class="product-name">TOTVS Fluig</div>
+          <p class="product-desc">Plataforma de BPM, gestión documental y portal colaborativo que automatiza procesos y unifica equipos en un solo lugar.</p>
+          <ul class="feature-list">
+            <li>Flujos de aprobación de contratos inmobiliarios</li>
+            <li>Portal de proveedores y clientes integrado</li>
+            <li>Gestión documental (planos, escrituras, acuerdos)</li>
+            <li>Firma electrónica de documentos</li>
+            <li>Automatización de onboarding de inquilinos</li>
+            <li>App móvil para equipos de campo</li>
+            <li>Notificaciones y alertas automáticas</li>
+          </ul>
+        </div>
+        <div class="product-card totvs-card">
+          <div class="product-name">TOTVS BI</div>
+          <p class="product-desc">Dashboards y reportes analíticos para decisiones basadas en datos en tiempo real sobre toda la operación.</p>
+          <ul class="feature-list">
+            <li>Dashboard de ocupación por zona geográfica</li>
+            <li>Análisis de rentabilidad por propiedad</li>
+            <li>Proyección de ingresos por vencimientos</li>
+            <li>Benchmark vs. mercado (zona Norte/Oeste/Sur)</li>
+            <li>Alertas automáticas de contratos a renovar</li>
+            <li>Reportes regulatorios automatizados</li>
+            <li>Integración con sistemas existentes vía API</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sol-rationale rationale-green">
+        <strong>¿Por qué el ecosistema TOTVS para MEGAESPACIOS?</strong>
+        TOTVS es el ERP líder en Latinoamérica con más de 40.000 clientes activos. La combinación de Protheus ERP + Fluig + BI permite a MEGAESPACIOS unificar toda su operación financiera, documental y estratégica en una única plataforma: gestión de activos, automatización de procesos, y visibilidad en tiempo real para decisiones de inversión y expansión basadas en datos concretos.
+      </div>
+    </div>
+
+    <!-- CALIPSO PANEL -->
+    <div id="sol-calipso" class="sol-panel">
+      <div class="sol-header">
+        <span class="badge badge-blue">Calipso ERP</span>
+        <span class="badge badge-blue">Portal de Proveedores</span>
+        <span class="badge badge-blue">100% local</span>
+      </div>
+      <div class="sol-headline">ERP argentino + Portal de Proveedores: control total, hecho a medida</div>
+      <p class="sol-desc">Calipso es el ERP de referencia en Argentina, desarrollado para las exigencias del mercado local. Combinado con nuestro Portal de Proveedores, MEGAESPACIOS tendrá control absoluto de su operación de principio a fin — con soporte local, en español y actualizado según normativa AFIP/ARCA.</p>
+
+      <div class="products-grid">
+        <div class="product-card calipso-card">
+          <div class="product-name">Calipso ERP</div>
+          <p class="product-desc">Solución integral de gestión empresarial adaptada a la normativa argentina con soporte local y actualizaciones constantes.</p>
+          <ul class="feature-list">
+            <li>Gestión contable y financiera (AFIP, ARCA)</li>
+            <li>Administración de contratos de alquiler y venta</li>
+            <li>Control de activos inmobiliarios</li>
+            <li>Compras, stock y logística integrados</li>
+            <li>Facturación electrónica nativa</li>
+            <li>Módulo de tesorería y flujo de caja</li>
+            <li>Soporte en español, equipo 100% local</li>
+          </ul>
+        </div>
+        <div class="product-card calipso-card">
+          <div class="product-name">Portal de Proveedores</div>
+          <p class="product-desc">Plataforma self-service donde los proveedores de MEGAESPACIOS gestionan sus pedidos, facturas y documentación de forma autónoma.</p>
+          <ul class="feature-list">
+            <li>Alta y onboarding digital de proveedores</li>
+            <li>Carga y seguimiento de facturas online</li>
+            <li>Órdenes de compra electrónicas</li>
+            <li>Gestión de certificados y habilitaciones</li>
+            <li>Estado de pagos en tiempo real</li>
+            <li>Comunicación bidireccional integrada</li>
+            <li>Acceso 24/7 sin intermediarios</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sol-rationale rationale-blue">
+        <strong>¿Por qué Calipso para MEGAESPACIOS?</strong>
+        Calipso está desarrollado y soportado en Argentina, con un equipo local que entiende las complejidades de AFIP, ARCA y la dinámica del mercado inmobiliario local. Ideal para empresas que necesitan un ERP robusto sin depender de proveedores internacionales, con costos accesibles y alta adaptabilidad al contexto argentino.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: CÓMO TRABAJAMOS + XPERTS
+══════════════════════════════════════════ -->
+<div id="pasos">
+
+  <div class="block">
+    <div class="section-label">Nuestro enfoque</div>
+    <div class="section-h2">Cómo Trabajamos</div>
+    <p class="section-desc">Nuestro enfoque de trabajo está diseñado para garantizar una transición exitosa y sostenible hacia la transformación digital. Un proceso estructurado que minimiza riesgos y asegura que cada solución se adapte perfectamente a las necesidades de su organización.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Diagnóstico</h4>
+          <p>Evaluamos procesos actuales, detectamos brechas y oportunidades de mejora. Entendemos la realidad única de su organización antes de proponer cualquier solución.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Selección</h4>
+          <p>Junto al equipo de MEGAESPACIOS, elegimos las soluciones más adecuadas para sus objetivos, cultura y estructura operativa. Sin recetas genéricas.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Configuración</h4>
+          <p>Personalizamos e integramos los sistemas seleccionados a los flujos reales de su operación. Cada implementación es adaptada a medida.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Capacitación</h4>
+          <p>Formamos a los equipos de MEGAESPACIOS para una adopción real y sostenida. Acompañamos el cambio organizacional con foco en resultados concretos.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Soporte continuo</h4>
+          <p>Mantenimiento, mejora continua y acompañamiento post-implementación. Estamos presentes en cada etapa del proceso tecnológico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- XPERTS INFO -->
+  <div class="block">
+    <div class="section-label">Por qué elegirnos</div>
+    <div class="section-h2">Xperts Consulting</div>
+    <p class="section-desc">Somos una empresa argentina con más de 25 años de experiencia en consultoría e implementación de soluciones tecnológicas empresariales. Nos posicionamos como aliados tecnológicos que combinan rigor técnico con profundo conocimiento de procesos de negocio.</p>
+
+    <div class="pain-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+      <div class="pain-card">
+        <div class="pain-icon" style="background:rgba(46,92,246,0.12);border-color:rgba(46,92,246,0.25);">🏆</div>
+        <div class="pain-text">
+          <strong>Experiencia Consolidada</strong>
+          <p>Más de dos décadas liderando proyectos tecnológicos exitosos en Argentina y la región.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon" style="background:rgba(46,92,246,0.12);border-color:rgba(46,92,246,0.25);">🤝</div>
+        <div class="pain-text">
+          <strong>Acompañamiento Integral</strong>
+          <p>Desde el análisis inicial hasta el soporte continuo, estamos con vos en cada paso del camino.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon" style="background:rgba(46,92,246,0.12);border-color:rgba(46,92,246,0.25);">🎓</div>
+        <div class="pain-text">
+          <strong>Certificaciones</strong>
+          <p>Alianzas estratégicas y certificaciones con proveedores líderes como TOTVS y Calipso.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon" style="background:rgba(46,92,246,0.12);border-color:rgba(46,92,246,0.25);">⚙️</div>
+        <div class="pain-text">
+          <strong>Soluciones a Medida</strong>
+          <p>Adaptamos cada implementación a la realidad única de tu organización. Sin soluciones genéricas.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon" style="background:rgba(46,92,246,0.12);border-color:rgba(46,92,246,0.25);">🔗</div>
+        <div class="pain-text">
+          <strong>Integración Total</strong>
+          <p>Todos los procesos de negocio unificados en sistemas centralizados, eliminando silos y doble carga.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon" style="background:rgba(46,92,246,0.12);border-color:rgba(46,92,246,0.25);">📍</div>
+        <div class="pain-text">
+          <strong>100% Local</strong>
+          <p>Equipo argentino, soporte en español, actualizado con normativa AFIP/ARCA y la dinámica del mercado local.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="cta-title">¿ARRANCAMOS JUNTOS?</div>
+    <p class="cta-sub">MEGAESPACIOS ya tiene el liderazgo del mercado inmobiliario industrial en Argentina.<br>La tecnología correcta lo hace imparable.</p>
+    <div class="cta-btns">
+      <a href="mailto:contacto@consultora.com?subject=MEGAESPACIOS%20–%20Seguimiento%20de%20reunión" class="btn-primary">Escribirnos →</a>
+      <a href="https://wa.me/5491100000000?text=Hola!%20Vi%20la%20propuesta%20de%20tecnolog%C3%ADa%20para%20MEGAESPACIOS" class="btn-ghost" target="_blank">Contactar por WhatsApp</a>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <span>Propuesta preparada especialmente para MEGAESPACIOS · 2026</span>
+  <span>Confidencial — Solo para uso interno</span>
+</footer>
+
+<script>
+  function showSol(id, el) {
+    document.querySelectorAll('.sol-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.sol-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('sol-' + id).classList.add('active');
+    if (el) el.classList.add('active');
+  }
+
+  // Highlight nav tab on scroll
+  const sections = [
+    { id: 'contexto', tab: 0 },
+    { id: 'soluciones', tab: 1 },
+    { id: 'pasos', tab: 2 },
+  ];
+  const navTabs = document.querySelectorAll('.nav-tab');
+
+  window.addEventListener('scroll', () => {
+    let current = 0;
+    sections.forEach((s, i) => {
+      const el = document.getElementById(s.id);
+      if (el && window.scrollY >= el.offsetTop - 100) current = i;
+    });
+    navTabs.forEach((t, i) => t.classList.toggle('active', i === current));
+  });
+  // Set initial active
+  navTabs[0].classList.add('active');
+</script>
+
+</body>
+</html>
